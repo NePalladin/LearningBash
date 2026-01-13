@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "V0.2"
+echo "V1.0"
 
 : "${DEPLOY_MODE:?Ошибка: Переменная DEPLOY_MODE  должна быть установленна!}" #проверяем установленна ли переменная окружения DEPLOY_MODE 
 
@@ -13,12 +13,12 @@ echo "[$(date +%Y-%m-%d_%H:%M:%S)] $1"
 
 function target_dir() #функция проверяющяя существует ли целевая дирректория для копирования, если нет, то создает ее
 {
-echo "checking if /tmp/backup/$1 is exist"
+echo "Проверяю сущестлвует ли /tmp/backup/$1"
 if [ -d /tmp/backup/$1 ]
 then
-	echo "dir /tmp/backup/$1 exists sciping this step"
+	echo "Дирректория /tmp/backup/$1, пропускаем этот шаг "
 else
-	echo "creating directory /tmp/backup/$1 "
+	echo "Создание дирректории /tmp/backup/$1 "
 	mkdir -p  /tmp/backup/$1
 fi
 }
@@ -35,19 +35,16 @@ done
 
 if [ -d "$log_dir" ] #проверка существует ли дирректория из которой мы копируем и директория ли это вообще
 then 
-	if [ "$DEPLOY_MODE" = "PROD" ]
+	if [[ "$DEPLOY_MODE" != "PROD"  && "$DEPLOY_MODE" != "DEV" ]]
 	then
-		echo "deploy mode = prod"
+		echo "Ошибка: DEPLOY_MODE должен быть DEV или PROD (сейчас $DEPLOY_MODE) "
+		exit 1
+	fi	
+		echo " Запуск в режиме  = $DEPLOY_MODE"
 		target_dir "$DEPLOY_MODE"
 		copy_files $log_dir $DEPLOY_MODE
-	else
-		echo " deploy mode = dev"
-		target_dir "$DEPLOY_MODE"
-		copy_files $log_dir $DEPLOY_MODE
-
-	fi
 else
-	echo "is not dir or it not exsist"
+	echo "Указаный путь не действителен либо это не дирректория"
 fi
 
 echo "Скрипт завершил работу с кодом $?"
