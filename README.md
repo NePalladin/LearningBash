@@ -1,4 +1,4 @@
-Description of my projects
+Description of my projects blablabla
 
 1.calculator.sh - ask you what operation you want to do, and do this with to numbers what you input 
 
