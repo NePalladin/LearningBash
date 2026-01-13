@@ -6,4 +6,4 @@ Description of my projects
 
 3.log_checker.sh - when you start this script in format ./log_checker.sh {dir_name} they check all content of dirrectory and write it, also they notice if the object log file or not
 
-4. backup-script.sh - smart backup script with logging and env checks
+4.backup-script.sh - smart backup script with logging and env checks execute this in format ./backup-script.sh {dir_name}
