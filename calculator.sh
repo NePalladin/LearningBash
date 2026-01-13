@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+echo "Версия скрипта 1.1"
 
 function calc()
 {
@@ -12,8 +12,6 @@ function calc()
 	then	
 		summ=$(($2+$3))
 		echo "Сумма "$2" и "$3" равна: $summ"
-	else 
-		echo "Неизвестное действие"
 	fi
 }
 echo "Что делаем?"
