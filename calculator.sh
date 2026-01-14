@@ -2,7 +2,7 @@
 
 echo "Версия скрипта 1.1"
 
-function calc()
+function calc() #функция подсчета
 {
 	if [ $1 == "-"  ]
 	then
